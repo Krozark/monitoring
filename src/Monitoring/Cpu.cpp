@@ -2,10 +2,10 @@
 
 #ifdef _WIN32 //_WIN64
 
-#include "windows.h"
-#include "psapi.h"
-#include "TCHAR.h"
-#include <Monitoring/Win32/pdh.h>
+#include <windows.h>
+#include <psapi.h>
+#include <TCHAR.h>
+#include <pdh.h>
 
 #elif __linux //|| __unix //or __APPLE__
 
