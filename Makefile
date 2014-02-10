@@ -1,6 +1,9 @@
 export CC = g++
 INCPATH = -I$(CURDIR)/include
-LIBS = 
+LIBS =
+ifeq ($(OS),Windows_NT)
+	LIBS+=-lpdh -lpsapi 
+endif
 #-lpthread 
 export DEFINES = 
 export FLAGS = -std=c++0x -o3 $(INCPATH) $(LIBS) $(DEFINES)

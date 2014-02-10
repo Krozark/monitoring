@@ -5,8 +5,6 @@
 #include <windows.h>
 #include <psapi.h>
 
-#pragma comment(lib,"psapi")
-
 #elif __linux //|| __unix //or __APPLE__
 
 #include <sys/types.h>
@@ -47,6 +45,7 @@ namespace sys
             return res;
         }
 
+        #ifdef __linux 
         int Virtual::parseLine(char* line)
         {
             int i = strlen(line);
@@ -55,6 +54,7 @@ namespace sys
             i = atoi(line);
             return i;
         }
+        #endif
 
 
         uint64_t Virtual::used()
@@ -84,7 +84,7 @@ namespace sys
 
             #ifdef _WIN32
             PROCESS_MEMORY_COUNTERS_EX pmc;
-            GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS)&pmc, sizeof(pmc));
+            GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc));
             res = pmc.PrivateUsage;
 
             #elif __linux

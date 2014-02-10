@@ -6,8 +6,6 @@
 #include <windows.h>
 #include <psapi.h>
 
-#pragma comment(lib,"psapi")
-
 #elif __linux //|| __unix //or __APPLE__
 
 #include <sys/types.h>
@@ -72,7 +70,7 @@ namespace sys
 
             #ifdef _WIN32
             PROCESS_MEMORY_COUNTERS_EX pmc;
-            GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS)&pmc, sizeof(pmc));
+            GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc));
             res = pmc.WorkingSetSize;
 
             #elif __linux        

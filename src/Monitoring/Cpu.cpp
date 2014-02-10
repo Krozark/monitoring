@@ -7,8 +7,6 @@
 #include <TCHAR.h>
 #include <pdh.h>
 
-#pragma comment(lib,"pdh")
-
 #elif __linux //|| __unix //or __APPLE__
 
 #include <sys/types.h>
@@ -167,7 +165,7 @@ namespace sys
         #ifdef _WIN32
         {
             PdhOpenQuery(NULL, NULL, &cpuQuery);
-            PdhAddCounter(cpuQuery, L"\\Processor(_Total)\\% Processor Time", NULL, &cpuTotal);
+            PdhAddCounter(cpuQuery, "\\Processor(_Total)\\% Processor Time", NULL, &cpuTotal);
             PdhCollectQueryData(cpuQuery);
         }
 
