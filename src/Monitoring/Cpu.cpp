@@ -26,7 +26,9 @@ namespace sys
     #ifdef _WIN32
     static PDH_HQUERY cpuQuery;
     static PDH_HCOUNTER cpuTotal;
-    static ULARGE_INTEGER lastCPU, lastSysCPU, lastUserCPU;
+    static ULARGE_INTEGER lastCPU,
+                   lastSysCPU,
+                   lastUserCPU;
     static HANDLE self;
     #elif __linux        
     static uint64_t lastTotalUser,
@@ -36,7 +38,7 @@ namespace sys
     static clock_t lastCPU, lastSysCPU, lastUserCPU;
     #endif
 
-    static int numProcessors;
+    int Cpu::numProcessors;
     bool Cpu::is_init = false;
     
     int Cpu::processors()

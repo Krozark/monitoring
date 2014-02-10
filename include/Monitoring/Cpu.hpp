@@ -35,6 +35,8 @@ namespace sys
             
             static void init();
 
+            static int numProcessors;
+
             static bool is_init;
     };
 }
