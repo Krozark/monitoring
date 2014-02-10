@@ -2,12 +2,12 @@ SRC = $(wildcard *.c*)
 OBJ = $(SRC:.cpp=.o) $(SRC:*.cpp=.o)
 
 .cpp.o:
-	$(CC) $(FLAGS) -o "$@" -c "$<" 
-	@$(CP) "$@" "$(OBJ_DIR)"
+	$(CC) $(FLAGS) -o $@ -c $<
+	@cp $@ $(OBJ_DIR)
 
 .c.o:
-	$(CC) $(FLAGS) -o "$@" -c "$<"
-	@$(CP) "$@" "$(OBJ_DIR)"
+	$(CC) $(FLAGS) -o $@ -c $<
+	@cp $@ $(OBJ_DIR)
 
 all: $(OBJ)
 

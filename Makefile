@@ -1,14 +1,15 @@
 export CC = g++
-INCPATH = -I"$(CURDIR)/include"
+INCPATH = -I$(CURDIR)/include
 LIBS =
 ifeq ($(OS),Windows_NT)
 	LIBS+=-lpdh -lpsapi 
 endif
+
 #-lpthread 
 export DEFINES = 
 export FLAGS = -std=c++0x -o3 $(INCPATH) $(LIBS) $(DEFINES)
 export TOP = $(CURDIR)
-export OBJ_DIR = "$(TOP)/obj"
+export OBJ_DIR = $(TOP)/obj
 
 export LIB = libmonitoring
 export STATIC = $(LIB).a
@@ -46,7 +47,7 @@ uninstall:
 	rm -rf /usr/local/include/Monitoring
 
 all: $(OBJ) subdirs
-	$(MAKE) -C "$@"
+	$(MAKE) -C $@
 
 
 doc : doc/html 
@@ -57,15 +58,15 @@ doc/html :
 subdirs: $(SUBDIRS)
      
 $(SUBDIRS):
-	$(MAKE) all -C "$@"
+	$(MAKE) all -C $@
 
 
 .cpp.o:
-	$(CC) $(FLAGS) -o "$@" -c "$^";
+	$(CC) $(FLAGS) -o $@ -c $^;
 	@mv "$@" "$(OBJ_DIR)"
 
 .c.o :
-	$(CC) $(FLAGS) -o "$@" -c "$^";
+	$(CC) $(FLAGS) -o $@ -c $^;
 	@mv "$@" "$(OBJ_DIR)"
 
 

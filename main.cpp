@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include <stdlib.h>
+#include <string.h>
 
 
 using namespace std;
@@ -10,15 +11,18 @@ int main(int argc,char* argv[])
 {
     cout<<"Cpu::processors: "<<sys::Cpu::processors()<<endl;
     
-    const int max = 10;
     uint64_t mem = 0;
-    for(int i=0;i<max;++i)
+
+    double max_mem = (double)sys::memory::Physical::total();
+
+    while(true)
     {
         cout<<"CPU:\n\tused "<<sys::Cpu::used()<<"\n\tusedByProc: "<<sys::Cpu::usedByProc()<<endl;
 
         size_t aloc = 1024*1024;
         mem +=aloc;
-        malloc(aloc);
+        void* buffer = malloc(aloc);
+        memset(buffer,0,aloc);
 
         cout<<"memory::Physical\n\ttotal: "<<sys::memory::Physical::total()<<"\n\tused: "<<sys::memory::Physical::used()<<"\n\tusedByProc: "<<sys::memory::Physical::usedByProc()<<endl;
 
@@ -27,6 +31,12 @@ int main(int argc,char* argv[])
         cout<<"Alocated: "<<mem<<endl;
 
         std::cout<<"--------------"<<std::endl;
+
+        if (sys::memory::Physical::usedByProc()/max_mem > 0.7 )
+        {
+            cout<<"70% of the memory is used by this program. stop"<<endl;
+            break;
+        }
     }
     return 0;
 }
