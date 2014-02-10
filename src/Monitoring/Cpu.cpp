@@ -7,6 +7,8 @@
 #include <TCHAR.h>
 #include <pdh.h>
 
+#pragma comment(lib,"pdh")
+
 #elif __linux //|| __unix //or __APPLE__
 
 #include <sys/types.h>
@@ -121,7 +123,7 @@ namespace sys
             memcpy(&user, &fuser, sizeof(FILETIME));
             percent = (sys.QuadPart - lastSysCPU.QuadPart) +(user.QuadPart - lastUserCPU.QuadPart);
             percent /= (now.QuadPart - lastCPU.QuadPart);
-            percent /= NumProcessors;
+            percent /= numProcessors;
             lastCPU = now;
             lastUserCPU = user;
             lastSysCPU = sys;

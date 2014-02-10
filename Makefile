@@ -59,11 +59,11 @@ $(SUBDIRS):
 
 .cpp.o:
 	$(CC) $(FLAGS) -o $@ -c $^;
-	@mv $@ "$(OBJ_DIR)"
+	@mv "$@" "$(OBJ_DIR)"
 
 .c.o :
 	$(CC) $(FLAGS) -o $@ -c $^;
-	@mv $@ "$(OBJ_DIR)"
+	@mv "$@" "$(OBJ_DIR)"
 
 
 clean: $(CLEANDIRS)

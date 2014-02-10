@@ -3,16 +3,18 @@
 
 #ifdef _WIN32 //_WIN64
 
-#include "windows.h"
-#include "psapi.h"
+#include <windows.h>
+#include <psapi.h>
+
+#pragma comment(lib,"psapi")
 
 #elif __linux //|| __unix //or __APPLE__
 
-#include "sys/types.h"
-#include "sys/sysinfo.h"
-#include "stdlib.h"
-#include "stdio.h"
-#include "string.h"
+#include <sys/types.h>
+#include <sys/sysinfo.h>
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
 
 #else
     #error not defined for this platform
@@ -70,7 +72,7 @@ namespace sys
 
             #ifdef _WIN32
             PROCESS_MEMORY_COUNTERS_EX pmc;
-            GetProcessMemoryInfo(GetCurrentProcess(), &pmc, sizeof(pmc));
+            GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS)&pmc, sizeof(pmc));
             res = pmc.WorkingSetSize;
 
             #elif __linux        
