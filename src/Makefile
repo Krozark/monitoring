@@ -10,7 +10,7 @@ all: subdirs
 subdirs: $(SUBDIRS)
      
 $(SUBDIRS):
-	$(MAKE) -C $@
+	$(MAKE) -C "$@"
 
 
 clean: $(CLEANDIRS)
