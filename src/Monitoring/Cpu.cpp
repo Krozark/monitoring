@@ -5,7 +5,7 @@
 #include "windows.h"
 #include "psapi.h"
 #include "TCHAR.h"
-#include "pdh.h"
+#include <Monitoring/Win32/pdh.h>
 
 #elif __linux //|| __unix //or __APPLE__
 
