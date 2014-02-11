@@ -38,5 +38,7 @@ int main(int argc,char* argv[])
             break;
         }
     }
+
+    sys::close();
     return 0;
 }

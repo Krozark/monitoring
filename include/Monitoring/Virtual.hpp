@@ -28,6 +28,8 @@ namespace sys
                  */
                 static uint64_t usedByProc();
 
+                static void close();
+
             private:
                 friend class Physical;
 
@@ -38,6 +40,9 @@ namespace sys
                 #ifdef __linux 
                 static int parseLine(char* line);
                 #endif
+
+                static void init();
+                static bool is_init;
 
         };
     }

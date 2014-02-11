@@ -36,6 +36,7 @@ namespace sys
              lastTotalSys,
              lastTotalIdle;
     static clock_t lastCPU, lastSysCPU, lastUserCPU;
+    FILE* proc_stats;
     #endif
 
     int Cpu::numProcessors;
@@ -69,10 +70,11 @@ namespace sys
         double percent;
         uint64_t totalUser, totalUserLow, totalSys, totalIdle, total;
 
+        //if(not proc_stats)
+            //return res;
         {
-            FILE* file = fopen("/proc/stat", "r");
-            fscanf(file, "cpu %Ld %Ld %Ld %Ld", &totalUser, &totalUserLow, &totalSys, &totalIdle);
-            fclose(file);
+            fseek(proc_stats,0,SEEK_SET);
+            fscanf(proc_stats, "cpu %Ld %Ld %Ld %Ld", &totalUser, &totalUserLow, &totalSys, &totalIdle);
         }
         if (totalUser < lastTotalUser || totalUserLow < lastTotalUserLow || totalSys < lastTotalSys || totalIdle < lastTotalIdle)
         {
@@ -209,8 +211,20 @@ namespace sys
             }
             fclose(file);
         }
+        {
+            proc_stats = fopen("/proc/stat", "r");
+        }
         #endif
 
         is_init = true;
+    }
+
+    void Cpu::close()
+    {
+        if(is_init)
+        {
+            fclose(proc_stats);
+            is_init = false;
+        }
     }
 }

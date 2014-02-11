@@ -28,6 +28,12 @@ namespace sys
             static double usedByProc();
 
 
+            /**
+             * \brief close opened files
+             */
+            static void close();
+
+
         private:
             Cpu() = delete;
             Cpu(const Cpu&) = delete;
@@ -38,6 +44,7 @@ namespace sys
             static int numProcessors;
 
             static bool is_init;
+
     };
 }
 #endif

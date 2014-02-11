@@ -24,6 +24,12 @@ namespace sys
 {
     namespace memory
     {
+        #ifdef _WIN32
+        #elif __linux        
+        FILE* proc_self_status_v;
+        #endif
+        bool Virtual::is_init = false;
+
         uint64_t Virtual::total()
         {
             uint64_t res = 0;
@@ -88,10 +94,13 @@ namespace sys
             res = pmc.PrivateUsage;
 
             #elif __linux
-            FILE* file = fopen("/proc/self/status", "r");
+            if(not is_init)
+                init();
+
+            fseek(proc_self_status_v,0,SEEK_SET);
             char line[128];
 
-            while (fgets(line, 128, file) != NULL)
+            while (fgets(line, 128, proc_self_status_v) != NULL)
             {
                 if (strncmp(line, "VmSize:", 7) == 0)
                 {
@@ -99,10 +108,24 @@ namespace sys
                     break;
                 }
             }
-            fclose(file);
             res *= 1024;
             #endif
             return res;
+        }
+
+        void Virtual::init()
+        {
+            proc_self_status_v = fopen("/proc/self/status", "r");
+            is_init = true;
+        }
+
+        void Virtual::close()
+        {
+            if(is_init)
+            {
+                is_init = false;
+                fclose(proc_self_status_v);
+            }
         }
     }
 }

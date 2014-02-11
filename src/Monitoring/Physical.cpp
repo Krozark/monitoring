@@ -22,6 +22,12 @@ namespace sys
 {
     namespace memory
     {
+        #ifdef _WIN32
+        #elif __linux        
+        FILE* proc_self_status;
+        #endif
+        bool Physical::is_init = false;
+
         uint64_t Physical::total()
         {
             uint64_t res = 0;
@@ -74,10 +80,12 @@ namespace sys
             res = pmc.WorkingSetSize;
 
             #elif __linux        
-            FILE* file = fopen("/proc/self/status", "r");
+            if(not is_init)
+                init();
+            fseek(proc_self_status,0,SEEK_SET);
             char line[128];
 
-            while (fgets(line, 128, file) != NULL)
+            while (fgets(line, 128, proc_self_status) != NULL)
             {
                 if (strncmp(line, "VmRSS:", 6) == 0)
                 {
@@ -85,10 +93,24 @@ namespace sys
                     break;
                 }
             }
-            fclose(file);
             res*=1024;
             #endif
             return res;
+        }
+
+        void Physical::init()
+        {
+            proc_self_status = fopen("/proc/self/status", "r");
+            is_init = true;
+        }
+
+        void Physical::close()
+        {
+            if(is_init)
+            {
+                is_init = false;
+                fclose(proc_self_status);
+            }
         }
         
     }
