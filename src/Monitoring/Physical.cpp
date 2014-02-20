@@ -81,7 +81,6 @@ namespace sys
             {
                 if (strncmp(line, "VmRSS:", 6) == 0)
                 {
-                    printf("%s",line);
                     res = Virtual::parseLine(line);
                     break;
                 }
