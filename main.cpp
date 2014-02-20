@@ -19,7 +19,7 @@ int main(int argc,char* argv[])
     {
         cout<<"CPU:\n\tused "<<sys::Cpu::used()<<"\n\tusedByProc: "<<sys::Cpu::usedByProc()<<endl;
 
-        size_t aloc = 1024*1024;
+        size_t aloc = 1024*64;
         mem +=aloc;
         void* buffer = malloc(aloc);
         memset(buffer,0,aloc);
@@ -38,7 +38,5 @@ int main(int argc,char* argv[])
             break;
         }
     }
-
-    sys::close();
     return 0;
 }

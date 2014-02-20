@@ -28,15 +28,12 @@ namespace sys
                  */
                 static uint64_t usedByProc();
 
-                static void close();
 
             private:
                 Physical() = delete;
                 Physical(const Physical&) = delete;
                 Physical& operator=(const Physical&) = delete;
 
-                static void init();
-                static bool is_init;
         };
     }
 }

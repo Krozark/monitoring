@@ -7,7 +7,7 @@ endif
 
 #-lpthread 
 export DEFINES = 
-export FLAGS = -std=c++0x -o3 $(INCPATH) $(LIBS) $(DEFINES)
+export FLAGS = -std=c++0x -g $(INCPATH) $(LIBS) $(DEFINES)
 export TOP = $(CURDIR)
 export OBJ_DIR = $(TOP)/obj
 

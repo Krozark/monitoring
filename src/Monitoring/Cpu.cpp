@@ -35,27 +35,38 @@ namespace sys
              lastTotalUserLow,
              lastTotalSys,
              lastTotalIdle;
-    static clock_t lastCPU, lastSysCPU, lastUserCPU;
-    FILE* proc_stats;
+    static clock_t lastCPU = 0,
+                   lastSysCPU = 0,
+                   lastUserCPU = 0;
     #endif
 
-    int Cpu::numProcessors;
-    bool Cpu::is_init = false;
+    int Cpu::numProcessors = 0;
     
     int Cpu::processors()
     {
-        if(not is_init)
-            init();
+        if(numProcessors <=0)
+        {
+            #ifdef _WIN32
+            #elif __linux        
 
+            char line[128];
+            FILE* file = fopen("/proc/cpuinfo", "r");
+            numProcessors = 0;
+
+            while(fgets(line, 128, file) != NULL)
+            {
+                if (strncmp(line, "processor", 9) == 0)
+                    ++numProcessors;
+            }
+            fclose(file);
+            #endif
+        }
         return numProcessors;
     }
 
     double Cpu::used()
     {
         double res = 0.f;
-
-        if(not is_init)
-            init();
 
         #ifdef _WIN32
         PDH_FMT_COUNTERVALUE counterVal;
@@ -70,11 +81,10 @@ namespace sys
         double percent;
         uint64_t totalUser, totalUserLow, totalSys, totalIdle, total;
 
-        //if(not proc_stats)
-            //return res;
         {
-            fseek(proc_stats,0,SEEK_SET);
+            FILE* proc_stats = fopen("/proc/stat", "r");
             fscanf(proc_stats, "cpu %Ld %Ld %Ld %Ld", &totalUser, &totalUserLow, &totalSys, &totalIdle);
+            fclose(proc_stats);
         }
         if (totalUser < lastTotalUser || totalUserLow < lastTotalUserLow || totalSys < lastTotalSys || totalIdle < lastTotalIdle)
         {
@@ -105,9 +115,6 @@ namespace sys
     double Cpu::usedByProc()
     {
         double res = 0.f;
-
-        if(not is_init)
-            init();
 
         #ifdef _WIN32
         {
@@ -162,7 +169,7 @@ namespace sys
         return res;
     }
 
-    void Cpu::init()
+   /* void Cpu::init()
     {
         #ifdef _WIN32
         {
@@ -188,43 +195,7 @@ namespace sys
         }
         #elif __linux        
         {
-            FILE* file = fopen("/proc/stat", "r");
-            fscanf(file, "cpu %Ld %Ld %Ld %Ld", &lastTotalUser, &lastTotalUserLow,&lastTotalSys, &lastTotalIdle);
-            fclose(file);
-        }
-        {
-            FILE* file;
-            struct tms timeSample;
-            char line[128];
-
-            lastCPU = times(&timeSample);
-            lastSysCPU = timeSample.tms_stime;
-            lastUserCPU = timeSample.tms_utime;
-
-            file = fopen("/proc/cpuinfo", "r");
-            numProcessors = 0;
-
-            while(fgets(line, 128, file) != NULL)
-            {
-                if (strncmp(line, "processor", 9) == 0)
-                    ++numProcessors;
-            }
-            fclose(file);
-        }
-        {
-            proc_stats = fopen("/proc/stat", "r");
         }
         #endif
-
-        is_init = true;
-    }
-
-    void Cpu::close()
-    {
-        if(is_init)
-        {
-            fclose(proc_stats);
-            is_init = false;
-        }
-    }
+    }*/
 }

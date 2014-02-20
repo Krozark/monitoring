@@ -28,22 +28,13 @@ namespace sys
             static double usedByProc();
 
 
-            /**
-             * \brief close opened files
-             */
-            static void close();
-
 
         private:
             Cpu() = delete;
             Cpu(const Cpu&) = delete;
             Cpu& operator=(const Cpu&) = delete;
             
-            static void init();
-
             static int numProcessors;
-
-            static bool is_init;
 
     };
 }
