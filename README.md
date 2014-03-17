@@ -6,11 +6,22 @@ a lib to determine CPU /memory consumption.
 
 Current build status: [![Build Status](https://travis-ci.org/Krozark/monitoring.png?branch=master)](https://travis-ci.org/Krozark/monitoring)
 
+Build
+=====
+
+Use cmake to build the lib.
+
 
 Examples
 ========
 
 Make a look to files in examples directory to see them.
+
+
+Doc
+===
+
+You can build the documentation using doxygen, or "make doc"
 
 
 Usage
