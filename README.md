@@ -39,6 +39,20 @@ You can use them by include
 ```
 
 
+sys
+---
+
+```c++
+    SYS_64BIT //defined is the OS is 64 bits
+    SYS_32BIT ///defined is the os is 32 bits
+
+    std::string osName();
+    std::string osNameBit();
+    int osBit();
+    bool checkBit();
+```
+
+
 sys::Cpu
 --------
 

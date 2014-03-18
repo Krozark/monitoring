@@ -10,7 +10,7 @@
 // Check windows
 #if _WIN32 || _WIN64
    #if _WIN64
-     #define SYS_64BIT
+     #define SYS_64BIT 
   #else
     #define SYS_32BIT
   #endif
@@ -27,10 +27,10 @@
 
 namespace sys
 {
-    std::string osName();
-    std::string osNameBit();
-    int osBit();
-    bool checkBit();
+    std::string osName();///< return the OS name
+    std::string osNameBit();///< return the os name-[x32/x64]
+    int osBit(); ///< return 32 or 64
+    bool checkBit();///< check at runtime if the osBit is correct
 }
 
 #endif
