@@ -9,6 +9,11 @@ using namespace std;
 
 int main(int argc,char* argv[])
 {
+    cout<<"Sys infos:\n\tosName: "<<sys::osName()
+        <<"\n\tosBit: "<<sys::osBit()
+        <<"\n\tosNameBit: "<<sys::osNameBit()
+        <<"\n\tcheckBit: "<<sys::checkBit()
+        <<std::endl;
     cout<<"Cpu::processors: "<<sys::Cpu::processors()<<endl;
     
     uint64_t mem = 0;

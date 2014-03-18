@@ -5,6 +5,7 @@ set(SRCROOT ${PROJECT_SOURCE_DIR}/src/${CMAKE_PROJECT_NAME})
 set(ROOT_SRC
     ${SRCROOT}/Cpu.cpp
     ${SRCROOT}/Physical.cpp
+    ${SRCROOT}/sys.cpp
     ${SRCROOT}/Virtual.cpp
 )
 set(ROOT_HEADER
@@ -48,6 +49,11 @@ SET_TARGET_PROPERTIES(${CMAKE_PROJECT_NAME}-static
 INSTALL(TARGETS ${CMAKE_PROJECT_NAME}-static
     DESTINATION lib
 )
+
+## EXAMPLES
+if(BUILD_EXAMPLES)
+    add_executable(${CMAKE_PROJECT_NAME}-test main.cpp ${FILES_HEADER} ${FILES_SRC})
+endif()
 
 #header
 #INSTALL(FILES ${INCROOT}
