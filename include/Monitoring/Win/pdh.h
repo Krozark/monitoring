@@ -14,6 +14,8 @@
 extern "C" {
 #endif
 
+#define __C89_NAMELESS
+
   typedef LONG PDH_STATUS;
 
 #define PDH_FUNCTION PDH_STATUS WINAPI

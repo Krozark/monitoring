@@ -34,14 +34,16 @@ set_option(BUILD_DOC TRUE BOOL "TRUE to generate the API documentation, FALSE to
 set(DEFINES "")
 
 if(${WIN32})
-    set(LIBS "-lpdh -lpsapi")
+	find_library(PDH_LIB pdh)
+	find_library(PSAPI_LIB psapi)
+	set(LIBS ${PDH_LIB} ${PSAPI_LIB})
 else()
     set(LIBS "")
 endif()
 
 set(WARNING "-Wall")
 set(FLAGS "-o3 -std=c++0x")
-set(CMAKE_CXX_FLAGS "${DEFINES} ${WARNING} ${FLAGS} ${LIBS}")
+set(CMAKE_CXX_FLAGS "${DEFINES} ${WARNING} ${FLAGS}")
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)
 set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/lib)
