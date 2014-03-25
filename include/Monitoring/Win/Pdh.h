@@ -23,7 +23,7 @@ Abstract:
 #define __out
 #define __out_opt
 #define __inout
-#define /*__out_bcount_opt*/(x) x
+#define __out_bcount_opt(x) x
 #define __success(x)*/
 
 
@@ -33,8 +33,8 @@ extern "C" {
 
 typedef LONG            PDH_STATUS;
 
+//#define PDH_FUNCTION    PDH_STATUS __stdcall
 #define PDH_FUNCTION    PDH_STATUS __stdcall
-
 // version info
 #define PDH_CVERSION_WIN40  ((DWORD)(0x0400))
 #define PDH_CVERSION_WIN50  ((DWORD)(0x0500))
@@ -407,7 +407,7 @@ PdhGetFormattedCounterValue(
     /*__out */    PPDH_FMT_COUNTERVALUE pValue
 );
 
-__success(return == ERROR_SUCCESS)
+//__success(return == ERROR_SUCCESS)
 PDH_FUNCTION
 PdhGetFormattedCounterArrayA(
     /*__in */   PDH_HCOUNTER hCounter,
