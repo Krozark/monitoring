@@ -11,3 +11,6 @@
 *.lai
 *.la
 *.a
+lib
+build
+/cmake/cmake_uninstall.cmake

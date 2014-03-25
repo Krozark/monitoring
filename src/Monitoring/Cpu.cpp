@@ -5,7 +5,8 @@
 #include <windows.h>
 #include <psapi.h>
 #include <TCHAR.h>
-#include <pdh.h>
+
+#include <Monitoring/Win/Pdh.h>
 
 #elif __linux //|| __unix //or __APPLE__
 
@@ -30,7 +31,7 @@ namespace sys
                    lastSysCPU,
                    lastUserCPU;
     static HANDLE self;
-    #elif __linux        
+    #elif __linux
     static uint64_t lastTotalUser,
              lastTotalUserLow,
              lastTotalSys,
@@ -41,13 +42,13 @@ namespace sys
     #endif
 
     int Cpu::numProcessors = 0;
-    
+
     int Cpu::processors()
     {
         if(numProcessors <=0)
         {
             #ifdef _WIN32
-            #elif __linux        
+            #elif __linux
 
             char line[128];
             FILE* file = fopen("/proc/cpuinfo", "r");
@@ -76,7 +77,7 @@ namespace sys
 
         res = counterVal.doubleValue;
 
-        #elif __linux        
+        #elif __linux
 
         double percent;
         uint64_t totalUser, totalUserLow, totalSys, totalIdle, total;
@@ -108,7 +109,7 @@ namespace sys
 
         res = percent;
         #endif
-        
+
         return res;
     }
 
@@ -138,7 +139,7 @@ namespace sys
 
             res = percent * 100;
         }
-        #elif __linux        
+        #elif __linux
         {
             struct tms timeSample;
             clock_t now;
@@ -193,7 +194,7 @@ namespace sys
             memcpy(&lastSysCPU, &fsys, sizeof(FILETIME));
             memcpy(&lastUserCPU, &fuser, sizeof(FILETIME));
         }
-        #elif __linux        
+        #elif __linux
         {
         }
         #endif
