@@ -3,18 +3,7 @@
 #include <iostream>
 
 #if _WIN32
-#include <string>
-#include <sstream>
-
-namespace std
-{
-    template < typename T > std::string to_string( const T& n )
-    {
-        std::ostringstream stm ;
-        stm << n ;
-        return stm.str() ;
-    }
-}
+#include <Monitoring/Win/sdtfx.hpp>
 #endif
 
 namespace sys
