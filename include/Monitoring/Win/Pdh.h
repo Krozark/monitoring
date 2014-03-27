@@ -23,7 +23,7 @@ Abstract:
 #define __out
 #define __out_opt
 #define __inout
-#define __out_bcount_opt(x) x
+#define /*__out_bcount_opt*/(x) x
 #define __success(x)*/
 
 
@@ -307,7 +307,7 @@ typedef struct _PDH_LOG_SERVICE_QUERY_INFO_W {
 
 PDH_FUNCTION
 PdhGetDllVersion(
-    __out_opt LPDWORD lpdwVersion
+    /*__out_opt */LPDWORD lpdwVersion
 );
 
 //
@@ -316,83 +316,83 @@ PdhGetDllVersion(
 
 PDH_FUNCTION
 PdhOpenQueryW(
-    __in_opt LPCWSTR      szDataSource,
-    __in     DWORD_PTR    dwUserData,
-    __out    PDH_HQUERY * phQuery
+    /*__in_opt */LPCWSTR      szDataSource,
+    /*__in */    DWORD_PTR    dwUserData,
+    /*__out */   PDH_HQUERY * phQuery
 );
 
 PDH_FUNCTION
 PdhOpenQueryA(
-    __in_opt LPCSTR       szDataSource,
-    __in     DWORD_PTR    dwUserData,
-    __out    PDH_HQUERY * phQuery
+    /*__in_opt */LPCSTR       szDataSource,
+    /*__in */    DWORD_PTR    dwUserData,
+    /*__out */   PDH_HQUERY * phQuery
 );
 
 PDH_FUNCTION
 PdhAddCounterW(
-    __in  PDH_HQUERY     hQuery,
-    __in  LPCWSTR        szFullCounterPath,
-    __in  DWORD_PTR      dwUserData,
-    __out PDH_HCOUNTER * phCounter
+    /*__in */ PDH_HQUERY     hQuery,
+    /*__in */ LPCWSTR        szFullCounterPath,
+    /*__in */ DWORD_PTR      dwUserData,
+    /*__out */PDH_HCOUNTER * phCounter
 );
 
 PDH_FUNCTION
 PdhAddCounterA(
-    __in  PDH_HQUERY     hQuery,
-    __in  LPCSTR         szFullCounterPath,
-    __in  DWORD_PTR      dwUserData,
-    __out PDH_HCOUNTER * phCounter
+    /*__in */ PDH_HQUERY     hQuery,
+    /*__in */ LPCSTR         szFullCounterPath,
+    /*__in */ DWORD_PTR      dwUserData,
+    /*__out */PDH_HCOUNTER * phCounter
 );
 
 #if (_WIN32_WINDOWS >= 0x0600 || _WIN32_WINNT >= 0x0600 || (defined(NTDDI_VERSION) && NTDDI_VERSION >= NTDDI_VISTA))
 PDH_FUNCTION
 PdhAddEnglishCounterW(
-    __in  PDH_HQUERY     hQuery,
-    __in  LPCWSTR        szFullCounterPath,
-    __in  DWORD_PTR      dwUserData,
-    __out PDH_HCOUNTER * phCounter
+    /*__in */ PDH_HQUERY     hQuery,
+    /*__in */ LPCWSTR        szFullCounterPath,
+    /*__in */ DWORD_PTR      dwUserData,
+    /*__out */PDH_HCOUNTER * phCounter
 );
 
 PDH_FUNCTION
 PdhAddEnglishCounterA(
-    __in  PDH_HQUERY     hQuery,
-    __in  LPCSTR         szFullCounterPath,
-    __in  DWORD_PTR      dwUserData,
-    __out PDH_HCOUNTER * phCounter
+    /*__in */ PDH_HQUERY     hQuery,
+    /*__in */ LPCSTR         szFullCounterPath,
+    /*__in */ DWORD_PTR      dwUserData,
+    /*__out */PDH_HCOUNTER * phCounter
 );
 
 PDH_FUNCTION
 PdhCollectQueryDataWithTime(
-    __inout PDH_HQUERY   hQuery,
-    __out   LONGLONG   * pllTimeStamp
+    /*__inout */PDH_HQUERY   hQuery,
+    /*__out */  LONGLONG   * pllTimeStamp
 );
 
 PDH_FUNCTION
 PdhValidatePathExW(
-    __in_opt PDH_HLOG hDataSource,
-    __in     LPCWSTR  szFullPathBuffer
+    /*__in_opt */PDH_HLOG hDataSource,
+    /*__in */    LPCWSTR  szFullPathBuffer
 );
 
 PDH_FUNCTION
 PdhValidatePathExA(
-    __in_opt PDH_HLOG hDataSource,
-    __in     LPCSTR   szFullPathBuffer
+    /*__in_opt */PDH_HLOG hDataSource,
+    /*__in */    LPCSTR   szFullPathBuffer
 );
 #endif
 
 PDH_FUNCTION
 PdhRemoveCounter(
-    __in PDH_HCOUNTER hCounter
+    /*__in */PDH_HCOUNTER hCounter
 );
 
 PDH_FUNCTION
 PdhCollectQueryData(
-    __inout PDH_HQUERY hQuery
+    /*__inout */PDH_HQUERY hQuery
 );
 
 PDH_FUNCTION
 PdhCloseQuery(
-    __inout PDH_HQUERY hQuery
+    /*__inout */PDH_HQUERY hQuery
 );
 
 //
@@ -401,30 +401,30 @@ PdhCloseQuery(
 
 PDH_FUNCTION
 PdhGetFormattedCounterValue(
-    __in      PDH_HCOUNTER          hCounter,
-    __in      DWORD                 dwFormat,
-    __out_opt LPDWORD               lpdwType,
-    __out     PPDH_FMT_COUNTERVALUE pValue
+    /*__in */     PDH_HCOUNTER          hCounter,
+    /*__in */     DWORD                 dwFormat,
+    /*__out_opt */LPDWORD               lpdwType,
+    /*__out */    PPDH_FMT_COUNTERVALUE pValue
 );
 
 __success(return == ERROR_SUCCESS)
 PDH_FUNCTION
 PdhGetFormattedCounterArrayA(
-    __in    PDH_HCOUNTER hCounter,
-    __in    DWORD        dwFormat,
-    __inout LPDWORD      lpdwBufferSize,
-    __out   LPDWORD      lpdwItemCount,
-    __out_bcount_opt(* lpdwBufferSize) PPDH_FMT_COUNTERVALUE_ITEM_A ItemBuffer
+    /*__in */   PDH_HCOUNTER hCounter,
+    /*__in */   DWORD        dwFormat,
+    /*__inout */LPDWORD      lpdwBufferSize,
+    /*__out */  LPDWORD      lpdwItemCount,
+    /*__out_bcount_opt*/(* lpdwBufferSize) PPDH_FMT_COUNTERVALUE_ITEM_A ItemBuffer
 );
 
 __success(return == ERROR_SUCCESS)
 PDH_FUNCTION
 PdhGetFormattedCounterArrayW(
-    __in    PDH_HCOUNTER hCounter,
-    __in    DWORD        dwFormat,
-    __inout LPDWORD      lpdwBufferSize,
-    __out   LPDWORD      lpdwItemCount,
-    __out_bcount_opt(* lpdwBufferSize) PPDH_FMT_COUNTERVALUE_ITEM_W ItemBuffer
+    /*__in */   PDH_HCOUNTER hCounter,
+    /*__in */   DWORD        dwFormat,
+    /*__inout */LPDWORD      lpdwBufferSize,
+    /*__out */  LPDWORD      lpdwItemCount,
+    /*__out_bcount_opt*/(* lpdwBufferSize) PPDH_FMT_COUNTERVALUE_ITEM_W ItemBuffer
 );
 
 // dwFormat flag values
@@ -444,64 +444,64 @@ PdhGetFormattedCounterArrayW(
 
 PDH_FUNCTION
 PdhGetRawCounterValue(
-    __in      PDH_HCOUNTER      hCounter,
-    __out_opt LPDWORD           lpdwType,
-    __out     PPDH_RAW_COUNTER  pValue
+    /*__in */     PDH_HCOUNTER      hCounter,
+    /*__out_opt */LPDWORD           lpdwType,
+    /*__out */    PPDH_RAW_COUNTER  pValue
 );
 
 __success(return == ERROR_SUCCESS)
 PDH_FUNCTION
 PdhGetRawCounterArrayA(
-    __in    PDH_HCOUNTER  hCounter,
-    __inout LPDWORD       lpdwBufferSize,
-    __out   LPDWORD       lpdwItemCount,
-    __out_bcount_opt(* lpdwBufferSize) PPDH_RAW_COUNTER_ITEM_A ItemBuffer
+    /*__in */   PDH_HCOUNTER  hCounter,
+    /*__inout */LPDWORD       lpdwBufferSize,
+    /*__out */  LPDWORD       lpdwItemCount,
+    /*__out_bcount_opt*/(* lpdwBufferSize) PPDH_RAW_COUNTER_ITEM_A ItemBuffer
 );
 
 __success(return == ERROR_SUCCESS)
 PDH_FUNCTION
 PdhGetRawCounterArrayW(
-    __in    PDH_HCOUNTER  hCounter,
-    __inout LPDWORD       lpdwBufferSize,
-    __out   LPDWORD       lpdwItemCount,
-    __out_bcount_opt(* lpdwBufferSize) PPDH_RAW_COUNTER_ITEM_W ItemBuffer
+    /*__in */   PDH_HCOUNTER  hCounter,
+    /*__inout */LPDWORD       lpdwBufferSize,
+    /*__out */  LPDWORD       lpdwItemCount,
+    /*__out_bcount_opt*/(* lpdwBufferSize) PPDH_RAW_COUNTER_ITEM_W ItemBuffer
 );
 
 PDH_FUNCTION
 PdhCalculateCounterFromRawValue(
-    __in  PDH_HCOUNTER          hCounter,
-    __in  DWORD                 dwFormat,
-    __in  PPDH_RAW_COUNTER      rawValue1,
-    __in  PPDH_RAW_COUNTER      rawValue2,
-    __out PPDH_FMT_COUNTERVALUE fmtValue
+    /*__in */ PDH_HCOUNTER          hCounter,
+    /*__in */ DWORD                 dwFormat,
+    /*__in */ PPDH_RAW_COUNTER      rawValue1,
+    /*__in */ PPDH_RAW_COUNTER      rawValue2,
+    /*__out */PPDH_FMT_COUNTERVALUE fmtValue
 );
 
 PDH_FUNCTION
 PdhComputeCounterStatistics(
-    __in  PDH_HCOUNTER     hCounter,
-    __in  DWORD            dwFormat,
-    __in  DWORD            dwFirstEntry,
-    __in  DWORD            dwNumEntries,
-    __in  PPDH_RAW_COUNTER lpRawValueArray,
-    __out PPDH_STATISTICS  data
+    /*__in */ PDH_HCOUNTER     hCounter,
+    /*__in */ DWORD            dwFormat,
+    /*__in */ DWORD            dwFirstEntry,
+    /*__in */ DWORD            dwNumEntries,
+    /*__in */ PPDH_RAW_COUNTER lpRawValueArray,
+    /*__out */PPDH_STATISTICS  data
 );
 
 __success(return == ERROR_SUCCESS)
 PDH_FUNCTION
 PdhGetCounterInfoW(
-    __in    PDH_HCOUNTER hCounter,
-    __in    BOOLEAN      bRetrieveExplainText,
-    __inout LPDWORD      pdwBufferSize,
-    __out_bcount_opt(* pdwBufferSize) PPDH_COUNTER_INFO_W lpBuffer
+    /*__in */   PDH_HCOUNTER hCounter,
+    /*__in */   BOOLEAN      bRetrieveExplainText,
+    /*__inout */LPDWORD      pdwBufferSize,
+    /*__out_bcount_opt*/(* pdwBufferSize) PPDH_COUNTER_INFO_W lpBuffer
 );
 
 __success(return == ERROR_SUCCESS)
 PDH_FUNCTION
 PdhGetCounterInfoA(
-    __in    PDH_HCOUNTER hCounter,
-    __in    BOOLEAN      bRetrieveExplainText,
-    __inout LPDWORD      pdwBufferSize,
-    __out_bcount_opt(* pdwBufferSize) PPDH_COUNTER_INFO_A lpBuffer
+    /*__in */   PDH_HCOUNTER hCounter,
+    /*__in */   BOOLEAN      bRetrieveExplainText,
+    /*__inout */LPDWORD      pdwBufferSize,
+    /*__out_bcount_opt*/(* pdwBufferSize) PPDH_COUNTER_INFO_A lpBuffer
 );
 
 #define PDH_MAX_SCALE  (7L)
@@ -509,114 +509,114 @@ PdhGetCounterInfoA(
 
 PDH_FUNCTION
 PdhSetCounterScaleFactor(
-    __inout PDH_HCOUNTER hCounter,
-    __in    LONG         lFactor
+    /*__inout */PDH_HCOUNTER hCounter,
+    /*__in */   LONG         lFactor
 );
 //
 //   Browsing and enumeration functions
 //
 PDH_FUNCTION
 PdhConnectMachineW(
-    __in_opt LPCWSTR szMachineName
+    /*__in_opt */LPCWSTR szMachineName
 );
 
 PDH_FUNCTION
 PdhConnectMachineA(
-    __in_opt LPCSTR szMachineName
+    /*__in_opt */LPCSTR szMachineName
 );
 
 PDH_FUNCTION
 PdhEnumMachinesW(
-    __in_opt LPCWSTR szDataSource,
-    __out_ecount_opt(* pcchBufferSize) PZZWSTR mszMachineList,
-    __inout LPDWORD pcchBufferSize
+    /*__in_opt */LPCWSTR szDataSource,
+    /*__out_ecount_opt*/(* pcchBufferSize) PZZWSTR mszMachineList,
+    /*__inout */LPDWORD pcchBufferSize
 );
 
 PDH_FUNCTION
 PdhEnumMachinesA(
-    __in_opt LPCSTR  szDataSource,
-    __out_ecount_opt(* pcchBufferSize) PZZSTR mszMachineList,
-    __inout LPDWORD pcchBufferSize
+    /*__in_opt */LPCSTR  szDataSource,
+    /*__out_ecount_opt*/(* pcchBufferSize) PZZSTR mszMachineList,
+    /*__inout */LPDWORD pcchBufferSize
 );
 
 PDH_FUNCTION
 PdhEnumObjectsW(
-    __in_opt LPCWSTR szDataSource,
-    __in_opt LPCWSTR szMachineName,
-    __out_ecount_opt(* pcchBufferSize) PZZWSTR mszObjectList,
-    __inout  LPDWORD pcchBufferSize,
-    __in     DWORD   dwDetailLevel,
-    __in     BOOL    bRefresh
+    /*__in_opt */LPCWSTR szDataSource,
+    /*__in_opt */LPCWSTR szMachineName,
+    /*__out_ecount_opt*/(* pcchBufferSize) PZZWSTR mszObjectList,
+    /*__inout */ LPDWORD pcchBufferSize,
+    /*__in */    DWORD   dwDetailLevel,
+    /*__in */    BOOL    bRefresh
 );
 
 PDH_FUNCTION
 PdhEnumObjectsA(
-    __in_opt LPCSTR  szDataSource,
-    __in_opt LPCSTR  szMachineName,
-    __out_ecount_opt(* pcchBufferSize) PZZSTR mszObjectList,
-    __inout  LPDWORD pcchBufferSize,
-    __in     DWORD   dwDetailLevel,
-    __in     BOOL    bRefresh
+    /*__in_opt */LPCSTR  szDataSource,
+    /*__in_opt */LPCSTR  szMachineName,
+    /*__out_ecount_opt*/(* pcchBufferSize) PZZSTR mszObjectList,
+    /*__inout */ LPDWORD pcchBufferSize,
+    /*__in */    DWORD   dwDetailLevel,
+    /*__in */    BOOL    bRefresh
 );
 
 PDH_FUNCTION
 PdhEnumObjectItemsW(
-    __in_opt LPCWSTR szDataSource,
-    __in_opt LPCWSTR szMachineName,
-    __in     LPCWSTR szObjectName,
-    __out_ecount_opt(* pcchCounterListLength) PZZWSTR mszCounterList,
-    __inout  LPDWORD pcchCounterListLength,
-    __out_ecount_opt(* pcchInstanceListLength) PZZWSTR mszInstanceList,
-    __inout  LPDWORD pcchInstanceListLength,
-    __in     DWORD   dwDetailLevel,
-    __in     DWORD   dwFlags
+    /*__in_opt */LPCWSTR szDataSource,
+    /*__in_opt */LPCWSTR szMachineName,
+    /*__in */    LPCWSTR szObjectName,
+    /*__out_ecount_opt*/(* pcchCounterListLength) PZZWSTR mszCounterList,
+    /*__inout */ LPDWORD pcchCounterListLength,
+    /*__out_ecount_opt*/(* pcchInstanceListLength) PZZWSTR mszInstanceList,
+    /*__inout */ LPDWORD pcchInstanceListLength,
+    /*__in */    DWORD   dwDetailLevel,
+    /*__in */    DWORD   dwFlags
 );
 
 PDH_FUNCTION
 PdhEnumObjectItemsA(
-    __in_opt LPCSTR  szDataSource,
-    __in_opt LPCSTR  szMachineName,
-    __in     LPCSTR  szObjectName,
-    __out_ecount_opt(* pcchCounterListLength) PZZSTR mszCounterList,
-    __inout  LPDWORD pcchCounterListLength,
-    __out_ecount_opt(* pcchInstanceListLength) PZZSTR mszInstanceList,
-    __inout  LPDWORD pcchInstanceListLength,
-    __in     DWORD   dwDetailLevel,
-    __in     DWORD   dwFlags
+    /*__in_opt */LPCSTR  szDataSource,
+    /*__in_opt */LPCSTR  szMachineName,
+    /*__in */    LPCSTR  szObjectName,
+    /*__out_ecount_opt*/(* pcchCounterListLength) PZZSTR mszCounterList,
+    /*__inout */ LPDWORD pcchCounterListLength,
+    /*__out_ecount_opt*/(* pcchInstanceListLength) PZZSTR mszInstanceList,
+    /*__inout */ LPDWORD pcchInstanceListLength,
+    /*__in */    DWORD   dwDetailLevel,
+    /*__in */    DWORD   dwFlags
 );
 
 PDH_FUNCTION
 PdhMakeCounterPathW(
-    __in    PPDH_COUNTER_PATH_ELEMENTS_W pCounterPathElements,
-    __out_ecount_opt(* pcchBufferSize)   LPWSTR szFullPathBuffer,
-    __inout LPDWORD                      pcchBufferSize,
-    __in    DWORD                        dwFlags
+    /*__in */   PPDH_COUNTER_PATH_ELEMENTS_W pCounterPathElements,
+    /*__out_ecount_opt*/(* pcchBufferSize)   LPWSTR szFullPathBuffer,
+    /*__inout */LPDWORD                      pcchBufferSize,
+    /*__in */   DWORD                        dwFlags
 );
 
 PDH_FUNCTION
 PdhMakeCounterPathA(
-    __in    PPDH_COUNTER_PATH_ELEMENTS_A pCounterPathElements,
-    __out_ecount_opt(* pcchBufferSize)   LPSTR szFullPathBuffer,
-    __inout LPDWORD                      pcchBufferSize,
-    __in    DWORD                        dwFlags
+    /*__in */   PPDH_COUNTER_PATH_ELEMENTS_A pCounterPathElements,
+    /*__out_ecount_opt*/(* pcchBufferSize)   LPSTR szFullPathBuffer,
+    /*__inout */LPDWORD                      pcchBufferSize,
+    /*__in */   DWORD                        dwFlags
 );
 
 __success(return == ERROR_SUCCESS)
 PDH_FUNCTION
 PdhParseCounterPathW(
-    __in    LPCWSTR                   szFullPathBuffer,
-    __out_bcount_opt(* pdwBufferSize) PPDH_COUNTER_PATH_ELEMENTS_W pCounterPathElements,
-    __inout LPDWORD                   pdwBufferSize,
-    __in    DWORD                     dwFlags
+    /*__in */   LPCWSTR                   szFullPathBuffer,
+    /*__out_bcount_opt*/(* pdwBufferSize) PPDH_COUNTER_PATH_ELEMENTS_W pCounterPathElements,
+    /*__inout */LPDWORD                   pdwBufferSize,
+    /*__in */   DWORD                     dwFlags
 );
 
 __success(return == ERROR_SUCCESS)
 PDH_FUNCTION
 PdhParseCounterPathA(
-    __in    LPCSTR                    szFullPathBuffer,
-    __out_bcount_opt(* pdwBufferSize) PPDH_COUNTER_PATH_ELEMENTS_A pCounterPathElements,
-    __inout LPDWORD                   pdwBufferSize,
-    __in    DWORD                     dwFlags
+    /*__in */   LPCSTR                    szFullPathBuffer,
+    /*__out_bcount_opt*/(* pdwBufferSize) PPDH_COUNTER_PATH_ELEMENTS_A pCounterPathElements,
+    /*__inout */LPDWORD                   pdwBufferSize,
+    /*__in */   DWORD                     dwFlags
 );
 
 #define PDH_PATH_WBEM_RESULT ((DWORD) 0x00000001)
@@ -626,66 +626,66 @@ PdhParseCounterPathA(
 
 PDH_FUNCTION
 PdhParseInstanceNameW(
-    __in    LPCWSTR szInstanceString,
-    __out_ecount_opt(* pcchInstanceNameLength) LPWSTR  szInstanceName,
-    __inout LPDWORD pcchInstanceNameLength,
-    __out_ecount_opt(* pcchParentNameLength)   LPWSTR  szParentName,
-    __inout LPDWORD pcchParentNameLength,
-    __out   LPDWORD lpIndex
+    /*__in */   LPCWSTR szInstanceString,
+    /*__out_ecount_opt*/(* pcchInstanceNameLength) LPWSTR  szInstanceName,
+    /*__inout */LPDWORD pcchInstanceNameLength,
+    /*__out_ecount_opt*/(* pcchParentNameLength)   LPWSTR  szParentName,
+    /*__inout */LPDWORD pcchParentNameLength,
+    /*__out */  LPDWORD lpIndex
 );
 
 PDH_FUNCTION
 PdhParseInstanceNameA(
-    __in    LPCSTR  szInstanceString,
-    __out_ecount_opt(* pcchInstanceNameLength) LPSTR   szInstanceName,
-    __inout LPDWORD pcchInstanceNameLength,
-    __out_ecount_opt(* pcchParentNameLength)   LPSTR   szParentName,
-    __inout LPDWORD pcchParentNameLength,
-    __out   LPDWORD lpIndex
+    /*__in */   LPCSTR  szInstanceString,
+    /*__out_ecount_opt*/(* pcchInstanceNameLength) LPSTR   szInstanceName,
+    /*__inout */LPDWORD pcchInstanceNameLength,
+    /*__out_ecount_opt*/(* pcchParentNameLength)   LPSTR   szParentName,
+    /*__inout */LPDWORD pcchParentNameLength,
+    /*__out */  LPDWORD lpIndex
 );
 
 PDH_FUNCTION
 PdhValidatePathW(
-    __in LPCWSTR szFullPathBuffer
+    /*__in */LPCWSTR szFullPathBuffer
 );
 
 PDH_FUNCTION
 PdhValidatePathA(
-    __in LPCSTR szFullPathBuffer
+    /*__in */LPCSTR szFullPathBuffer
 );
 
 PDH_FUNCTION
 PdhGetDefaultPerfObjectW(
-    __in_opt LPCWSTR szDataSource,
-    __in_opt LPCWSTR szMachineName,
-    __out_ecount_opt(* pcchBufferSize) LPWSTR  szDefaultObjectName,
-    __inout  LPDWORD pcchBufferSize
+    /*__in_opt */LPCWSTR szDataSource,
+    /*__in_opt */LPCWSTR szMachineName,
+    /*__out_ecount_opt*/(* pcchBufferSize) LPWSTR  szDefaultObjectName,
+    /*__inout */ LPDWORD pcchBufferSize
 );
 
 PDH_FUNCTION
 PdhGetDefaultPerfObjectA(
-    __in_opt LPCSTR  szDataSource,
-    __in_opt LPCSTR  szMachineName,
-    __out_ecount_opt(* pcchBufferSize) LPSTR   szDefaultObjectName,
-    __inout  LPDWORD pcchBufferSize
+    /*__in_opt */LPCSTR  szDataSource,
+    /*__in_opt */LPCSTR  szMachineName,
+    /*__out_ecount_opt*/(* pcchBufferSize) LPSTR   szDefaultObjectName,
+    /*__inout */ LPDWORD pcchBufferSize
 );
 
 PDH_FUNCTION
 PdhGetDefaultPerfCounterW(
-    __in_opt LPCWSTR szDataSource,
-    __in_opt LPCWSTR szMachineName,
-    __in     LPCWSTR szObjectName,
-    __out_ecount_opt(* pcchBufferSize) LPWSTR  szDefaultCounterName,
-    __inout  LPDWORD pcchBufferSize
+    /*__in_opt */LPCWSTR szDataSource,
+    /*__in_opt */LPCWSTR szMachineName,
+    /*__in */    LPCWSTR szObjectName,
+    /*__out_ecount_opt*/(* pcchBufferSize) LPWSTR  szDefaultCounterName,
+    /*__inout */ LPDWORD pcchBufferSize
 );
 
 PDH_FUNCTION
 PdhGetDefaultPerfCounterA(
-    __in_opt LPCSTR  szDataSource,
-    __in_opt LPCSTR  szMachineName,
-    __in     LPCSTR  szObjectName,
-    __out_ecount_opt(* pcchBufferSize) LPSTR   szDefaultCounterName,
-    __inout  LPDWORD pcchBufferSize
+    /*__in_opt */LPCSTR  szDataSource,
+    /*__in_opt */LPCSTR  szMachineName,
+    /*__in */    LPCSTR  szObjectName,
+    /*__out_ecount_opt*/(* pcchBufferSize) LPSTR   szDefaultCounterName,
+    /*__inout */ LPDWORD pcchBufferSize
 );
 
 typedef PDH_STATUS (__stdcall * CounterPathCallBack)(DWORD_PTR);
@@ -854,26 +854,26 @@ typedef struct _BrowseDlgConfig_A {
 
 PDH_FUNCTION
 PdhBrowseCountersW(
-    __in PPDH_BROWSE_DLG_CONFIG_W pBrowseDlgData
+    /*__in */PPDH_BROWSE_DLG_CONFIG_W pBrowseDlgData
 );
 
 PDH_FUNCTION
 PdhBrowseCountersA(
-    __in PPDH_BROWSE_DLG_CONFIG_A pBrowseDlgData
+    /*__in */PPDH_BROWSE_DLG_CONFIG_A pBrowseDlgData
 );
 
 PDH_FUNCTION
 PdhExpandCounterPathW(
-    __in    LPCWSTR szWildCardPath,
-    __out_ecount_opt(* pcchPathListLength) PZZWSTR  mszExpandedPathList,
-    __inout LPDWORD pcchPathListLength
+    /*__in */   LPCWSTR szWildCardPath,
+    /*__out_ecount_opt*/(* pcchPathListLength) PZZWSTR  mszExpandedPathList,
+    /*__inout */LPDWORD pcchPathListLength
 );
 
 PDH_FUNCTION
 PdhExpandCounterPathA(
-    __in    LPCSTR  szWildCardPath,
-    __out_ecount_opt(* pcchPathListLength) PZZSTR   mszExpandedPathList,
-    __inout LPDWORD pcchPathListLength
+    /*__in */   LPCSTR  szWildCardPath,
+    /*__out_ecount_opt*/(* pcchPathListLength) PZZSTR   mszExpandedPathList,
+    /*__inout */LPDWORD pcchPathListLength
 );
 
 //
@@ -881,32 +881,32 @@ PdhExpandCounterPathA(
 //
 PDH_FUNCTION
 PdhLookupPerfNameByIndexW(
-    __in_opt LPCWSTR szMachineName,
-    __in     DWORD   dwNameIndex,
-    __out_ecount_opt(* pcchNameBufferSize) LPWSTR  szNameBuffer,
-    __inout  LPDWORD pcchNameBufferSize
+    /*__in_opt */LPCWSTR szMachineName,
+    /*__in */    DWORD   dwNameIndex,
+    /*__out_ecount_opt*/(* pcchNameBufferSize) LPWSTR  szNameBuffer,
+    /*__inout */ LPDWORD pcchNameBufferSize
 );
 
 PDH_FUNCTION
 PdhLookupPerfNameByIndexA(
-    __in_opt LPCSTR  szMachineName,
-    __in     DWORD   dwNameIndex,
-    __out_ecount_opt(* pcchNameBufferSize) LPSTR   szNameBuffer,
-    __inout  LPDWORD pcchNameBufferSize
+    /*__in_opt */LPCSTR  szMachineName,
+    /*__in */    DWORD   dwNameIndex,
+    /*__out_ecount_opt*/(* pcchNameBufferSize) LPSTR   szNameBuffer,
+    /*__inout */ LPDWORD pcchNameBufferSize
 );
 
 PDH_FUNCTION
 PdhLookupPerfIndexByNameW(
-    __in_opt LPCWSTR szMachineName,
-    __in     LPCWSTR szNameBuffer,
-    __out    LPDWORD pdwIndex
+    /*__in_opt */LPCWSTR szMachineName,
+    /*__in */    LPCWSTR szNameBuffer,
+    /*__out */   LPDWORD pdwIndex
 );
 
 PDH_FUNCTION
 PdhLookupPerfIndexByNameA(
-    __in_opt LPCSTR  szMachineName,
-    __in     LPCSTR  szNameBuffer,
-    __out    LPDWORD pdwIndex
+    /*__in_opt */LPCSTR  szMachineName,
+    /*__in */    LPCSTR  szNameBuffer,
+    /*__out */   LPDWORD pdwIndex
 );
 
 #define PDH_NOEXPANDCOUNTERS    1
@@ -917,20 +917,20 @@ PdhLookupPerfIndexByNameA(
 
 PDH_FUNCTION
 PdhExpandWildCardPathA(
-    __in_opt LPCSTR  szDataSource,
-    __in     LPCSTR  szWildCardPath,
-    __out_ecount_opt(* pcchPathListLength) PZZSTR   mszExpandedPathList,
-    __inout  LPDWORD pcchPathListLength,
-    __in     DWORD   dwFlags
+    /*__in_opt */LPCSTR  szDataSource,
+    /*__in */    LPCSTR  szWildCardPath,
+    /*__out_ecount_opt*/(* pcchPathListLength) PZZSTR   mszExpandedPathList,
+    /*__inout */ LPDWORD pcchPathListLength,
+    /*__in */    DWORD   dwFlags
 );
 
 PDH_FUNCTION
 PdhExpandWildCardPathW(
-    __in_opt LPCWSTR szDataSource,
-    __in     LPCWSTR szWildCardPath,
-    __out_ecount_opt(* pcchPathListLength) PZZWSTR  mszExpandedPathList,
-    __inout  LPDWORD pcchPathListLength,
-    __in     DWORD   dwFlags
+    /*__in_opt */LPCWSTR szDataSource,
+    /*__in */    LPCWSTR szWildCardPath,
+    /*__out_ecount_opt*/(* pcchPathListLength) PZZWSTR  mszExpandedPathList,
+    /*__inout */ LPDWORD pcchPathListLength,
+    /*__in */    DWORD   dwFlags
 );
 
 //
@@ -972,53 +972,53 @@ PdhExpandWildCardPathW(
 
 PDH_FUNCTION
 PdhOpenLogW(
-    __in     LPCWSTR     szLogFileName,
-    __in     DWORD       dwAccessFlags,
-    __inout  LPDWORD     lpdwLogType,
-    __in_opt PDH_HQUERY  hQuery,
-    __in     DWORD       dwMaxSize,
-    __in_opt LPCWSTR     szUserCaption,
-    __out    PDH_HLOG  * phLog
+    /*__in */    LPCWSTR     szLogFileName,
+    /*__in */    DWORD       dwAccessFlags,
+    /*__inout */ LPDWORD     lpdwLogType,
+    /*__in_opt */PDH_HQUERY  hQuery,
+    /*__in */    DWORD       dwMaxSize,
+    /*__in_opt */LPCWSTR     szUserCaption,
+    /*__out */   PDH_HLOG  * phLog
 );
 
 PDH_FUNCTION
 PdhOpenLogA(
-    __in     LPCSTR       szLogFileName,
-    __in     DWORD        dwAccessFlags,
-    __inout  LPDWORD      lpdwLogType,
-    __in_opt PDH_HQUERY   hQuery,
-    __in     DWORD        dwMaxSize,
-    __in_opt LPCSTR       szUserCaption,
-    __out    PDH_HLOG   * phLog
+    /*__in */    LPCSTR       szLogFileName,
+    /*__in */    DWORD        dwAccessFlags,
+    /*__inout */ LPDWORD      lpdwLogType,
+    /*__in_opt */PDH_HQUERY   hQuery,
+    /*__in */    DWORD        dwMaxSize,
+    /*__in_opt */LPCSTR       szUserCaption,
+    /*__out */   PDH_HLOG   * phLog
 );
 
 PDH_FUNCTION
 PdhUpdateLogW(
-    __in     PDH_HLOG hLog,
-    __in_opt LPCWSTR  szUserString
+    /*__in */    PDH_HLOG hLog,
+    /*__in_opt */LPCWSTR  szUserString
 );
 
 PDH_FUNCTION
 PdhUpdateLogA(
-    __in     PDH_HLOG hLog,
-    __in_opt LPCSTR   szUserString
+    /*__in */    PDH_HLOG hLog,
+    /*__in_opt */LPCSTR   szUserString
 );
 
 PDH_FUNCTION
 PdhUpdateLogFileCatalog(
-    __in PDH_HLOG hLog
+    /*__in */PDH_HLOG hLog
 );
 
 PDH_FUNCTION
 PdhGetLogFileSize(
-    __in  PDH_HLOG   hLog,
-    __out LONGLONG * llSize
+    /*__in */ PDH_HLOG   hLog,
+    /*__out */LONGLONG * llSize
 );
 
 PDH_FUNCTION
 PdhCloseLog(
-    __in PDH_HLOG hLog,
-    __in DWORD    dwFlags
+    /*__in */PDH_HLOG hLog,
+    /*__in */DWORD    dwFlags
 );
 
 #define PDH_FLAGS_CLOSE_QUERY   ((DWORD) 0x00000001)
@@ -1029,79 +1029,79 @@ PdhCloseLog(
 
 PDH_FUNCTION
 PdhSelectDataSourceW(
-    __in    HWND    hWndOwner,
-    __in    DWORD   dwFlags,
+    /*__in */   HWND    hWndOwner,
+    /*__in */   DWORD   dwFlags,
     __inout_ecount(* pcchBufferLength) LPWSTR  szDataSource,
-    __inout LPDWORD pcchBufferLength
+    /*__inout */LPDWORD pcchBufferLength
 );
 
 PDH_FUNCTION
 PdhSelectDataSourceA(
-    __in    HWND    hWndOwner,
-    __in    DWORD   dwFlags,
+    /*__in */   HWND    hWndOwner,
+    /*__in */   DWORD   dwFlags,
     __inout_ecount(* pcchBufferLength) LPSTR   szDataSource,
-    __inout LPDWORD pcchBufferLength
+    /*__inout */LPDWORD pcchBufferLength
 );
 
 BOOL
 PdhIsRealTimeQuery(
-    __in PDH_HQUERY hQuery
+    /*__in */PDH_HQUERY hQuery
 );
 
 PDH_FUNCTION
 PdhSetQueryTimeRange(
-    __in PDH_HQUERY     hQuery,
-    __in PPDH_TIME_INFO pInfo
+    /*__in */PDH_HQUERY     hQuery,
+    /*__in */PPDH_TIME_INFO pInfo
 );
 
 __success(return == ERROR_SUCCESS)
 PDH_FUNCTION
 PdhGetDataSourceTimeRangeW(
-    __in_opt LPCWSTR  szDataSource,
-    __out    LPDWORD  pdwNumEntries,
+    /*__in_opt */LPCWSTR  szDataSource,
+    /*__out */   LPDWORD  pdwNumEntries,
     __out_bcount(* pdwBufferSize)    PPDH_TIME_INFO pInfo,
-    __inout  LPDWORD  pdwBufferSize
+    /*__inout */ LPDWORD  pdwBufferSize
 );
 
 __success(return == ERROR_SUCCESS)
 PDH_FUNCTION
 PdhGetDataSourceTimeRangeA(
-    __in_opt LPCSTR   szDataSource,
-    __out    LPDWORD  pdwNumEntries,
+    /*__in_opt */LPCSTR   szDataSource,
+    /*__out */   LPDWORD  pdwNumEntries,
     __out_bcount(* pdwBufferSize) PPDH_TIME_INFO pInfo,
-    __inout  LPDWORD  pdwBufferSize
+    /*__inout */ LPDWORD  pdwBufferSize
 );
 
 PDH_FUNCTION
 PdhCollectQueryDataEx(
-    __in PDH_HQUERY hQuery,
-    __in DWORD      dwIntervalTime,
-    __in HANDLE     hNewDataEvent
+    /*__in */PDH_HQUERY hQuery,
+    /*__in */DWORD      dwIntervalTime,
+    /*__in */HANDLE     hNewDataEvent
 );
 
 PDH_FUNCTION
 PdhFormatFromRawValue(
-    __in  DWORD                   dwCounterType,
-    __in  DWORD                   dwFormat,
-    __in  LONGLONG              * pTimeBase,
-    __in  PPDH_RAW_COUNTER        pRawValue1,
-    __in  PPDH_RAW_COUNTER        pRawValue2,
-    __out PPDH_FMT_COUNTERVALUE   pFmtValue
+    /*__in */ DWORD                   dwCounterType,
+    /*__in */ DWORD                   dwFormat,
+    /*__in */ LONGLONG              * pTimeBase,
+    /*__in */ PPDH_RAW_COUNTER        pRawValue1,
+    /*__in */ PPDH_RAW_COUNTER        pRawValue2,
+    /*__out */PPDH_FMT_COUNTERVALUE   pFmtValue
 );
 
 PDH_FUNCTION
 PdhGetCounterTimeBase(
-    __in  PDH_HCOUNTER   hCounter,
-    __out LONGLONG     * pTimeBase
+    /*__in */ PDH_HCOUNTER   hCounter,
+    /*__out */LONGLONG     * pTimeBase
 );
 
 __success(return == ERROR_SUCCESS)
 PDH_FUNCTION
 PdhReadRawLogRecord(
-    __in    PDH_HLOG  hLog,
-    __in    FILETIME  ftRecord,
-    __out_bcount_opt(* pdwBufferLength) PPDH_RAW_LOG_RECORD pRawLogRecord,
-    __inout LPDWORD   pdwBufferLength
+    /*__in */   PDH_HLOG  hLog,
+    /*__in */   FILETIME  ftRecord,
+    /*__out_bcount_opt*/(* pdwBufferLength) PPDH_RAW_LOG_RECORD pRawLogRecord,
+    /*__inout */LPDWORD   pdwBufferLength
 );
 
 
@@ -1111,7 +1111,7 @@ PdhReadRawLogRecord(
 
 PDH_FUNCTION
 PdhSetDefaultRealTimeDataSource(
-    __in DWORD dwDataSourceId
+    /*__in */DWORD dwDataSourceId
 );
 
 #if (_WIN32_WINDOWS >= 0x0501 || _WIN32_WINNT >= 0x0501 || (defined(NTDDI_VERSION) && NTDDI_VERSION >= NTDDI_WINXP))
@@ -1119,205 +1119,205 @@ PdhSetDefaultRealTimeDataSource(
 //
 PDH_FUNCTION
 PdhBindInputDataSourceW(
-    __out    PDH_HLOG * phDataSource,
-    __in_opt LPCWSTR    LogFileNameList
+    /*__out */   PDH_HLOG * phDataSource,
+    /*__in_opt */LPCWSTR    LogFileNameList
 );
 
 PDH_FUNCTION
 PdhBindInputDataSourceA(
-    __out    PDH_HLOG * phDataSource,
-    __in_opt LPCSTR     LogFileNameList
+    /*__out */   PDH_HLOG * phDataSource,
+    /*__in_opt */LPCSTR     LogFileNameList
 );
 
 PDH_FUNCTION
 PdhOpenQueryH(
-    __in_opt  PDH_HLOG     hDataSource,
-    __in      DWORD_PTR    dwUserData,
-    __out     PDH_HQUERY * phQuery
+    /*__in_opt */ PDH_HLOG     hDataSource,
+    /*__in */     DWORD_PTR    dwUserData,
+    /*__out */    PDH_HQUERY * phQuery
 );
 
 PDH_FUNCTION
 PdhEnumMachinesHW(
-    __in_opt PDH_HLOG hDataSource,
-    __out_ecount_opt(* pcchBufferSize) PZZWSTR   mszMachineList,
-    __inout  LPDWORD  pcchBufferSize
+    /*__in_opt */PDH_HLOG hDataSource,
+    /*__out_ecount_opt*/(* pcchBufferSize) PZZWSTR   mszMachineList,
+    /*__inout */ LPDWORD  pcchBufferSize
 );
 
 PDH_FUNCTION
 PdhEnumMachinesHA(
-    __in_opt PDH_HLOG hDataSource,
-    __out_ecount_opt(* pcchBufferSize) PZZSTR    mszMachineList,
-    __inout  LPDWORD  pcchBufferSize
+    /*__in_opt */PDH_HLOG hDataSource,
+    /*__out_ecount_opt*/(* pcchBufferSize) PZZSTR    mszMachineList,
+    /*__inout */ LPDWORD  pcchBufferSize
 );
 
 PDH_FUNCTION
 PdhEnumObjectsHW(
-    __in_opt PDH_HLOG hDataSource,
-    __in_opt LPCWSTR  szMachineName,
-    __out_ecount_opt(* pcchBufferSize) PZZWSTR   mszObjectList,
-    __inout  LPDWORD  pcchBufferSize,
-    __in     DWORD    dwDetailLevel,
-    __in     BOOL     bRefresh
+    /*__in_opt */PDH_HLOG hDataSource,
+    /*__in_opt */LPCWSTR  szMachineName,
+    /*__out_ecount_opt*/(* pcchBufferSize) PZZWSTR   mszObjectList,
+    /*__inout */ LPDWORD  pcchBufferSize,
+    /*__in */    DWORD    dwDetailLevel,
+    /*__in */    BOOL     bRefresh
 ) ;
 
 PDH_FUNCTION
 PdhEnumObjectsHA(
-    __in_opt PDH_HLOG hDataSource,
-    __in_opt LPCSTR   szMachineName,
-    __out_ecount_opt(* pcchBufferSize) PZZSTR    mszObjectList,
-    __inout  LPDWORD  pcchBufferSize,
-    __in     DWORD    dwDetailLevel,
-    __in     BOOL     bRefresh
+    /*__in_opt */PDH_HLOG hDataSource,
+    /*__in_opt */LPCSTR   szMachineName,
+    /*__out_ecount_opt*/(* pcchBufferSize) PZZSTR    mszObjectList,
+    /*__inout */ LPDWORD  pcchBufferSize,
+    /*__in */    DWORD    dwDetailLevel,
+    /*__in */    BOOL     bRefresh
 );
 
 PDH_FUNCTION
 PdhEnumObjectItemsHW(
-    __in_opt PDH_HLOG hDataSource,
-    __in_opt LPCWSTR  szMachineName,
-    __in     LPCWSTR  szObjectName,
-    __out_ecount_opt(* pcchCounterListLength) PZZWSTR   mszCounterList,
-    __inout  LPDWORD  pcchCounterListLength,
-    __out_ecount_opt(* pcchInstanceListLength) PZZWSTR   mszInstanceList,
-    __inout  LPDWORD  pcchInstanceListLength,
-    __in     DWORD    dwDetailLevel,
-    __in     DWORD    dwFlags
+    /*__in_opt */PDH_HLOG hDataSource,
+    /*__in_opt */LPCWSTR  szMachineName,
+    /*__in */    LPCWSTR  szObjectName,
+    /*__out_ecount_opt*/(* pcchCounterListLength) PZZWSTR   mszCounterList,
+    /*__inout */ LPDWORD  pcchCounterListLength,
+    /*__out_ecount_opt*/(* pcchInstanceListLength) PZZWSTR   mszInstanceList,
+    /*__inout */ LPDWORD  pcchInstanceListLength,
+    /*__in */    DWORD    dwDetailLevel,
+    /*__in */    DWORD    dwFlags
 );
 
 PDH_FUNCTION
 PdhEnumObjectItemsHA(
-    __in_opt PDH_HLOG hDataSource,
-    __in_opt LPCSTR   szMachineName,
-    __in     LPCSTR   szObjectName,
-    __out_ecount_opt(* pcchCounterListLength) PZZSTR    mszCounterList,
-    __inout  LPDWORD  pcchCounterListLength,
-    __out_ecount_opt(* pcchInstanceListLength) PZZSTR    mszInstanceList,
-    __inout  LPDWORD  pcchInstanceListLength,
-    __in     DWORD    dwDetailLevel,
-    __in     DWORD    dwFlags
+    /*__in_opt */PDH_HLOG hDataSource,
+    /*__in_opt */LPCSTR   szMachineName,
+    /*__in */    LPCSTR   szObjectName,
+    /*__out_ecount_opt*/(* pcchCounterListLength) PZZSTR    mszCounterList,
+    /*__inout */ LPDWORD  pcchCounterListLength,
+    /*__out_ecount_opt*/(* pcchInstanceListLength) PZZSTR    mszInstanceList,
+    /*__inout */ LPDWORD  pcchInstanceListLength,
+    /*__in */    DWORD    dwDetailLevel,
+    /*__in */    DWORD    dwFlags
 );
 
 PDH_FUNCTION
 PdhExpandWildCardPathHW(
-    __in_opt PDH_HLOG hDataSource,
-    __in     LPCWSTR  szWildCardPath,
-    __out_ecount_opt(* pcchPathListLength) PZZWSTR   mszExpandedPathList,
-    __inout  LPDWORD  pcchPathListLength,
-    __in    DWORD    dwFlags
+    /*__in_opt */PDH_HLOG hDataSource,
+    /*__in */    LPCWSTR  szWildCardPath,
+    /*__out_ecount_opt*/(* pcchPathListLength) PZZWSTR   mszExpandedPathList,
+    /*__inout */ LPDWORD  pcchPathListLength,
+    /*__in */   DWORD    dwFlags
 );
 
 PDH_FUNCTION
 PdhExpandWildCardPathHA(
-    __in_opt PDH_HLOG hDataSource,
-    __in     LPCSTR   szWildCardPath,
-    __out_ecount_opt(* pcchPathListLength) PZZSTR    mszExpandedPathList,
-    __inout  LPDWORD  pcchPathListLength,
-    __in    DWORD    dwFlags
+    /*__in_opt */PDH_HLOG hDataSource,
+    /*__in */    LPCSTR   szWildCardPath,
+    /*__out_ecount_opt*/(* pcchPathListLength) PZZSTR    mszExpandedPathList,
+    /*__inout */ LPDWORD  pcchPathListLength,
+    /*__in */   DWORD    dwFlags
 );
 
 __success(return == ERROR_SUCCESS)
 PDH_FUNCTION
 PdhGetDataSourceTimeRangeH(
     __inout_opt PDH_HLOG hDataSource,
-    __out       LPDWORD  pdwNumEntries,
+    /*__out */      LPDWORD  pdwNumEntries,
     __out_bcount(* pdwBufferSize) PPDH_TIME_INFO pInfo,
-    __inout  LPDWORD  pdwBufferSize
+    /*__inout */ LPDWORD  pdwBufferSize
 );
 
 PDH_FUNCTION
 PdhGetDefaultPerfObjectHW(
-    __in_opt PDH_HLOG hDataSource,
-    __in_opt LPCWSTR  szMachineName,
-    __out_ecount_opt(* pcchBufferSize) LPWSTR   szDefaultObjectName,
-    __inout  LPDWORD  pcchBufferSize
+    /*__in_opt */PDH_HLOG hDataSource,
+    /*__in_opt */LPCWSTR  szMachineName,
+    /*__out_ecount_opt*/(* pcchBufferSize) LPWSTR   szDefaultObjectName,
+    /*__inout */ LPDWORD  pcchBufferSize
 );
 
 PDH_FUNCTION
 PdhGetDefaultPerfObjectHA(
-    __in_opt PDH_HLOG hDataSource,
-    __in_opt LPCSTR   szMachineName,
-    __out_ecount_opt(* pcchBufferSize) LPSTR    szDefaultObjectName,
-    __inout  LPDWORD  pcchBufferSize
+    /*__in_opt */PDH_HLOG hDataSource,
+    /*__in_opt */LPCSTR   szMachineName,
+    /*__out_ecount_opt*/(* pcchBufferSize) LPSTR    szDefaultObjectName,
+    /*__inout */ LPDWORD  pcchBufferSize
 );
 
 PDH_FUNCTION
 PdhGetDefaultPerfCounterHW(
-    __in_opt PDH_HLOG hDataSource,
-    __in_opt LPCWSTR  szMachineName,
-    __in     LPCWSTR  szObjectName,
-    __out_ecount_opt(* pcchBufferSize) LPWSTR   szDefaultCounterName,
-    __inout  LPDWORD  pcchBufferSize
+    /*__in_opt */PDH_HLOG hDataSource,
+    /*__in_opt */LPCWSTR  szMachineName,
+    /*__in */    LPCWSTR  szObjectName,
+    /*__out_ecount_opt*/(* pcchBufferSize) LPWSTR   szDefaultCounterName,
+    /*__inout */ LPDWORD  pcchBufferSize
 );
 
 PDH_FUNCTION
 PdhGetDefaultPerfCounterHA(
-    __in_opt PDH_HLOG hDataSource,
-    __in_opt LPCSTR   szMachineName,
-    __in     LPCSTR   szObjectName,
-    __out_ecount_opt(* pcchBufferSize) LPSTR    szDefaultCounterName,
-    __inout  LPDWORD  pcchBufferSize
+    /*__in_opt */PDH_HLOG hDataSource,
+    /*__in_opt */LPCSTR   szMachineName,
+    /*__in */    LPCSTR   szObjectName,
+    /*__out_ecount_opt*/(* pcchBufferSize) LPSTR    szDefaultCounterName,
+    /*__inout */ LPDWORD  pcchBufferSize
 );
 
 PDH_FUNCTION
 PdhBrowseCountersHW(
-    __in PPDH_BROWSE_DLG_CONFIG_HW pBrowseDlgData
+    /*__in */PPDH_BROWSE_DLG_CONFIG_HW pBrowseDlgData
 );
 
 PDH_FUNCTION
 PdhBrowseCountersHA(
-    __in PPDH_BROWSE_DLG_CONFIG_HA pBrowseDlgData
+    /*__in */PPDH_BROWSE_DLG_CONFIG_HA pBrowseDlgData
 );
 
 //Check that a DSN points to a database that contains the correct Perfmon tables.
 PDH_FUNCTION
 PdhVerifySQLDBW(
-    __in LPCWSTR szDataSource
+    /*__in */LPCWSTR szDataSource
 );
 
 PDH_FUNCTION
 PdhVerifySQLDBA(
-    __in LPCSTR szDataSource
+    /*__in */LPCSTR szDataSource
 );
 
 
 //Create the correct perfmon tables in the database pointed to by a DSN.
 PDH_FUNCTION
 PdhCreateSQLTablesW(
-    __in LPCWSTR szDataSource
+    /*__in */LPCWSTR szDataSource
 );
 
 PDH_FUNCTION
 PdhCreateSQLTablesA(
-    __in LPCSTR szDataSource
+    /*__in */LPCSTR szDataSource
 );
 
 //Return the list of Log set names in the database pointed to by the DSN.
 PDH_FUNCTION
 PdhEnumLogSetNamesW(
-    __in    LPCWSTR szDataSource,
-    __out_ecount_opt(* pcchBufferLength) PZZWSTR  mszDataSetNameList,
-    __inout LPDWORD pcchBufferLength
+    /*__in */   LPCWSTR szDataSource,
+    /*__out_ecount_opt*/(* pcchBufferLength) PZZWSTR  mszDataSetNameList,
+    /*__inout */LPDWORD pcchBufferLength
 );
 
 PDH_FUNCTION
 PdhEnumLogSetNamesA(
-    __in    LPCSTR  szDataSource,
-    __out_ecount_opt(* pcchBufferLength) PZZSTR   mszDataSetNameList,
-    __inout LPDWORD pcchBufferLength
+    /*__in */   LPCSTR  szDataSource,
+    /*__out_ecount_opt*/(* pcchBufferLength) PZZSTR   mszDataSetNameList,
+    /*__inout */LPDWORD pcchBufferLength
 );
 
 //Retrieve the GUID for an open Log Set
 PDH_FUNCTION
 PdhGetLogSetGUID(
-    __in      PDH_HLOG   hLog,
-    __out_opt GUID     * pGuid,
-    __out_opt int      * pRunId
+    /*__in */     PDH_HLOG   hLog,
+    /*__out_opt */GUID     * pGuid,
+    /*__out_opt */int      * pRunId
 );
 
 //Set the RunID for an open Log Set
 PDH_FUNCTION
 PdhSetLogSetRunID(
-    __inout PDH_HLOG hLog,
-    __in    int      RunId
+    /*__inout */PDH_HLOG hLog,
+    /*__in */   int      RunId
 );
 #endif
 
