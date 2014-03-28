@@ -12,6 +12,13 @@ Build
 Use cmake to build the lib.
 
 
+Testing
+=======
+
+Ubuntu 12.04+ x86/32
+Windows xp x86
+
+
 Examples
 ========
 
