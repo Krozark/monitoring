@@ -13,7 +13,7 @@ project (Monitoring)
 
 # setup version numbers
 set(VERSION_MAJOR 0)
-set(VERSION_MINOR 2)
+set(VERSION_MINOR 1)
 set(VERSION_PATCH 0)
 
 
@@ -38,7 +38,7 @@ if(${WIN32})
 	find_library(PSAPI_LIB psapi)
 	set(LIBS ${PDH_LIB} ${PSAPI_LIB})
 else()
-    #set(LIBS "")
+    set(LIBS "")
 endif()
 
 set(WARNING "-Wall")
