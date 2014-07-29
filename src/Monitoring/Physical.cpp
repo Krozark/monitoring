@@ -4,6 +4,7 @@
 #ifdef _WIN32 //_WIN64
 
 #include <windows.h>
+;
 #include <psapi.h>
 
 #elif __linux //|| __unix //or __APPLE__
@@ -32,7 +33,7 @@ namespace sys
             GlobalMemoryStatusEx(&memInfo);
             res = memInfo.ullTotalPhys;
 
-            #elif __linux        
+            #elif __linux
             struct sysinfo memInfo;
 
             sysinfo (&memInfo);
@@ -52,8 +53,8 @@ namespace sys
             memInfo.dwLength = sizeof(MEMORYSTATUSEX);
             GlobalMemoryStatusEx(&memInfo);
             res = memInfo.ullTotalPhys - memInfo.ullAvailPhys;
-            
-            #elif __linux        
+
+            #elif __linux
             struct sysinfo memInfo;
 
             sysinfo (&memInfo);
@@ -73,7 +74,7 @@ namespace sys
             GetProcessMemoryInfo(GetCurrentProcess(), (PROCESS_MEMORY_COUNTERS*)&pmc, sizeof(pmc));
             res = pmc.WorkingSetSize;
 
-            #elif __linux        
+            #elif __linux
             FILE* proc_self_status = fopen("/proc/self/status", "r");
             char line[128];
 
