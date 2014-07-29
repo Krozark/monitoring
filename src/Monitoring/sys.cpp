@@ -40,6 +40,7 @@ namespace sys
             return 32;
         #else
             #error "Must define either SYS_32BIT or SYS_64BIT"
+            return 0;
         #endif
     }
 
